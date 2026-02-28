@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YouTube Transcript Generator
+
+Extract transcripts from any YouTube video in multiple formats with AI-powered summarization.
+
+[Live Demo](https://youtube-transcript-green.vercel.app/) · [GitHub](https://github.com/henglyrepo/youtube-transcript-public)
+
+## Features
+
+- **Multiple Output Formats**: JSON, Plain Text, SRT, VTT, HTML
+- **Multi-language Support**: 12+ languages including English, Spanish, French, German, Japanese, Korean, Chinese, and more
+- **AI-Powered Summarization**: Generate concise summaries using Chrome's built-in AI
+- **Search Within Transcript**: Filter and search through transcript segments
+- **Download Support**: Download transcripts with video title as filename
+- **History Management**: View and reload previous transcripts
+- **Dark/Light Mode**: Toggle between themes
+- **SEO Optimized**: Meta tags, Open Graph, JSON-LD structured data
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
+- **Styling**: Tailwind CSS v4
+- **Transcript API**: youtube-transcript-plus
+- **Icons**: Lucide React
+- **Deployment**: Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/henglyrepo/youtube-transcript-public.git
+cd youtube-transcript-public
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Supported Output Formats
 
-To learn more about Next.js, take a look at the following resources:
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| JSON | Structured data with timestamps | Developers |
+| Plain Text | Simple text transcript | Reading |
+| SRT | Subtitle format | Video editing (CapCut, Premiere, DaVinci) |
+| VTT | Web subtitle format | Web players |
+| HTML | Formatted transcript | Display on websites |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Deploy to Vercel with one click:
 
-## Deploy on Vercel
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/henglyrepo/youtube-transcript-public)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License - feel free to use this project for any purpose.
+
+## Author
+
+**@henglyrepo** - [GitHub](https://github.com/henglyrepo)

@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Copy, Download, Moon, Sun, Youtube, Sparkles, ChevronDown, ChevronUp } from "lucide-react";
+import { Loader2, Copy, Download, Moon, Sun, Youtube, Sparkles, ChevronDown, ChevronUp, Github } from "lucide-react";
 import { summarizeText, SUMMARY_STYLES, SUMMARY_LENGTHS, SummaryStyle } from "@/lib/summarizer";
 import { getHistory, addToHistory, clearHistory, formatTimestamp, HistoryEntry } from "@/lib/history";
 
@@ -256,6 +256,15 @@ export default function Home() {
           <p className="text-lg text-zinc-400">
             Extract transcripts from any YouTube video in multiple formats
           </p>
+          <a
+            href="https://github.com/henglyrepo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 inline-flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-300 transition-colors"
+          >
+            <Github className="h-4 w-4" />
+            Developed by @henglyrepo
+          </a>
         </div>
 
         <Card className="mb-4 border-zinc-800/50 bg-zinc-900/50 backdrop-blur-xl shadow-2xl shadow-black/20">

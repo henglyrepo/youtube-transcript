@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://youtubetranscript.com"),
+  metadataBase: new URL("https://youtube-transcript-green.vercel.app"),
   title: {
     default: "YouTube Transcript Generator - Free Tool | Extract Video Transcripts",
     template: "%s | YouTube Transcript Generator",
