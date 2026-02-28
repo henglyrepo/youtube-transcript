@@ -59,10 +59,60 @@
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **UI Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Transcript API**: [youtube-transcript-plus](https://www.npmjs.com/package/youtube-transcript-plus)
+- **Transcript API**: [youtube-transcript-plus](https://www.npmjs.com/package/youtube-transcript-plus) (default) or [YouTube Data API v3](https://developers.google.com/youtube/v3) (optional)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **State Management**: React hooks + localStorage
 - **Deployment**: [Vercel](https://vercel.com/)
+
+---
+
+## ⚠️ Cloud Deployment Important Note
+
+> **This section is critical if you plan to deploy to Vercel or any cloud provider.**
+
+### The Problem
+
+When running locally, this application works perfectly because requests to YouTube come from your **residential IP address**. However, when deployed to **Vercel, AWS, Azure, or other cloud providers**, YouTube detects the traffic is coming from **datacenter/server IPs** and blocks the requests - returning "No transcript available for this video" even when transcripts exist.
+
+This is a known limitation of YouTube's anti-bot protection. Cloud provider IP ranges are well-documented and YouTube actively blocks them.
+
+### Solutions
+
+#### Option 1: Use a Residential Proxy (Recommended for Free Tier)
+
+Route your requests through a residential proxy to bypass YouTube's IP blocking:
+
+1. Sign up for a proxy service like [WebShare](https://webshare.io), Bright Data, or Oxylabs
+2. Add your proxy credentials to environment variables (see below)
+3. The app will automatically use the proxy for YouTube requests
+
+#### Option 2: Use YouTube Data API (More Reliable)
+
+Use the official YouTube Data API v3 to fetch captions:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a project and enable "YouTube Data API v3"
+3. Create an API key
+4. Add the API key to your environment variables
+
+#### Option 3: Self-Host on Residential IP
+
+Deploy the application on a server with a residential IP (home server, dedicated server with residential proxy).
+
+### Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```bash
+# Option A: YouTube Data API (recommended for production)
+YOUTUBE_DATA_API_KEY=your_google_api_key_here
+
+# Option B: Residential Proxy (for youtube-transcript-plus)
+PROXY_URL=http://username:password@proxy-host:port
+
+# Optional: Choose default method (youtube-data-api, proxy, auto)
+TRANSCRIPT_METHOD=auto
+```
 
 ---
 
@@ -139,7 +189,8 @@ POST /api/transcript
 {
   "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   "language": "en",
-  "format": "json"
+  "format": "json",
+  "method": "auto"
 }
 ```
 
@@ -150,6 +201,13 @@ POST /api/transcript
 | `videoUrl` | string | Yes | YouTube URL or video ID |
 | `language` | string | No | Language code (default: "en") |
 | `format` | string | No | Output format: json, text, srt, vtt, html (default: "json") |
+| `method` | string | No | Transcript source: "auto", "youtube-data-api", "proxy" (default: "auto") |
+
+### Method Selection
+
+- **`auto`**: Tries youtube-transcript-plus first, falls back to proxy or YouTube Data API if configured
+- **`youtube-data-api`**: Uses official YouTube Data API (requires `YOUTUBE_DATA_API_KEY`)
+- **`proxy`**: Uses youtube-transcript-plus with proxy (requires `PROXY_URL`)
 
 ### Example Response
 
@@ -200,6 +258,16 @@ npm i -g vercel
 # Deploy
 vercel
 ```
+
+### Environment Variables for Production
+
+When deploying to Vercel, add the following environment variables in your Vercel project settings:
+
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `YOUTUBE_DATA_API_KEY` | No | Your Google Cloud API key for YouTube Data API |
+| `PROXY_URL` | No | Residential proxy URL (format: `http://user:pass@host:port`) |
+| `TRANSCRIPT_METHOD` | No | Default method: "auto", "youtube-data-api", or "proxy" |
 
 For more deployment options, see [Next.js Deployment Documentation](https://nextjs.org/docs/app/building-your-application/deploying).
 
