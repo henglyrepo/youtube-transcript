@@ -1,0 +1,17 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://youtubetranscript.com/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
+
+# Disallow private directories
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Host directive
+Host: https://youtubetranscript.com
